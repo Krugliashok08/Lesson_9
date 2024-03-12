@@ -1,6 +1,8 @@
 package org.example;
 import java.util.Random;
+import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 public class Main {
     public static void main(String[] args) {
@@ -10,7 +12,7 @@ public class Main {
         System.out.println("Количество чётных чисел: " + countEven);
 
 
-        List<String> collection = new ArrayList<>();
+        ArrayList<String> collection = new ArrayList<>();
         collection.add("Highload");
         collection.add("High");
         collection.add("Load");
@@ -23,6 +25,8 @@ public class Main {
 
         String lastElement = getLastElement(collection);
         System.out.println("Последний элемент в коллекции: " + lastElement);
+        ArrayList<String> al = new ArrayList<>(Arrays.asList("f10","a15","f2","f4","f5","b54","a16"));
+        al.stream().sorted().forEach(el -> System.out.println(el));
 
     }
     public static int[] generateRandomArray(int size) {
@@ -51,7 +55,7 @@ public class Main {
         return count;
 
     }
-    private static int countHigh(List<String> collection) {
+    private static int countHigh(ArrayList<String> collection) {
         int count = 0;
         for (String str : collection) {
 
@@ -66,7 +70,7 @@ public class Main {
         return count;
 
     }
-    private static String getFirstElement(List<String> collection) {
+    private static String getFirstElement(ArrayList<String> collection) {
         if (!collection.isEmpty()) {
 
             return collection.get(0);
@@ -78,7 +82,7 @@ public class Main {
         }
 
     }
-    private static String getLastElement(List<String> collection) {
+    private static String getLastElement(ArrayList<String> collection) {
         if (!collection.isEmpty()) {
 
             return collection.get(collection.size() - 1);
