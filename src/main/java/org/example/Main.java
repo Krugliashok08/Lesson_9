@@ -2,8 +2,7 @@ package org.example;
 import java.util.Random;
 import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
@@ -25,10 +24,11 @@ public class Main {
 
         String lastElement = getLastElement(collection);
         System.out.println("Последний элемент в коллекции: " + lastElement);
-        ArrayList<String> al = new ArrayList<>(Arrays.asList("f10","a15","f2","f4","f5","b54","a16"));
+        ArrayList<String> al = new ArrayList<>(Arrays.asList("f10", "a15", "f2", "f4", "f5", "b54", "a16"));
         al.stream().sorted().forEach(el -> System.out.println(el));
-
+        Scanner scanner = new Scanner(System.in);
     }
+
     public static int[] generateRandomArray(int size) {
 
         Random random = new Random();
@@ -41,6 +41,7 @@ public class Main {
         return array;
 
     }
+
     public static int countEvenNumbers(int[] array) {
         int count = 0;
         for (int num : array) {
@@ -55,6 +56,7 @@ public class Main {
         return count;
 
     }
+
     private static int countHigh(ArrayList<String> collection) {
         int count = 0;
         for (String str : collection) {
@@ -70,6 +72,7 @@ public class Main {
         return count;
 
     }
+
     private static String getFirstElement(ArrayList<String> collection) {
         if (!collection.isEmpty()) {
 
@@ -82,6 +85,7 @@ public class Main {
         }
 
     }
+
     private static String getLastElement(ArrayList<String> collection) {
         if (!collection.isEmpty()) {
 
@@ -94,5 +98,4 @@ public class Main {
         }
 
     }
-
 }
