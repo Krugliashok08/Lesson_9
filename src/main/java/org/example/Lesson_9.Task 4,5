@@ -1,1 +1,96 @@
+package org.example;
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Collection<Student> students = Arrays.asList(
+                new Student("Дмитрий", 17, "MAN"),
+                new Student("Максим", 20, "MAN"),
+                new Student("Екатерина", 20, "WOMAN"),
+                new Student("Михаил", 28, "MAN"));
+    }
+
+    private enum Gender {
+        MAN,
+        WOMAN
+    }
+
+    private static class Student {
+        private final String name;
+        private final Integer age;
+        private final String gender;
+
+        public Student(String name, Integer age, Gender gender) {
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public Integer getAge() {
+            return age;
+        }
+
+        public Gender getGender() {
+            return gender;
+        }
+
+        @Override
+        public String toString() {
+            return "{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    ", gender=" + gender +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Student)) return false;
+            Student student = (Student) o;
+            return Objects.equals(name, student.name) &&
+                    Objects.equals(age, student.age) &&
+                    Objects.equals(gender, student.gender);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, age, gender);
+        }
+    }
+
+    int ManStudentsCount = 0;
+
+    int ManStudentsAgeSum = 0;
+
+        for(
+    Student student :students)
+
+    {
+
+        if (student.getGender().equals("Man")) {
+
+            ManStudentsCount++;
+
+            ManStudentsAgeSum += student.getAge();
+
+        }
+
+        if (student.getAge() >= 18 && student.getAge() <= 27) {
+
+            System.out.println(student.getGender() + " " + student.getAge() + " Призывной возраст");
+
+        }
+
+    }
+
+    double averageAgeOfManStudents = (double) ManStudentsAgeSum / ManStudentsCount;
+        System.out.println("Средний возраст студентов мужского пола: "+averageAgeOfManStudents);
+}
+    }
 
