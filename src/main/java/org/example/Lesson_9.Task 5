@@ -1,0 +1,31 @@
+package org.example;
+import java.util.Scanner;
+import java.util.ArrayList;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> logins = new ArrayList<>();
+        System.out.println("Ввод логинов.Ввод пустой строки:");
+        while (true) {
+
+            String login = scanner.nextLine();
+
+            if (login.isEmpty()) {
+
+                break;
+
+            }
+            logins.add(login);
+
+        }
+        System.out.println("Логины, начинающиеся на 'f':");
+
+        for (String login : logins) {
+
+            if (!login.isEmpty() && login.charAt(0) == 'f') {
+
+                System.out.println(login);
+
+            }
+
+        }
