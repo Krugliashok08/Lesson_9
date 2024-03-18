@@ -1,25 +1,15 @@
 package org.example;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args) {
-        Collection<Student> students = Arrays.asList(
-                new Student("Дмитрий", 17, "MAN"),
-                new Student("Максим", 20, "MAN"),
-                new Student("Екатерина", 20, "WOMAN"),
-                new Student("Михаил", 28, "MAN"));
-    }
-
-    private enum Gender {
-        MAN,
-        WOMAN
-    }
+    private enum Gender {MAN, WOMAN}
 
     private static class Student {
         private final String name;
         private final Integer age;
-        private final String gender;
+        private final Gender gender;
 
         public Student(String name, Integer age, Gender gender) {
             this.name = name;
@@ -35,17 +25,13 @@ public class Main {
             return age;
         }
 
-        public Gender getGender() {
+        public Gender getGender(Gender man) {
             return gender;
         }
 
         @Override
         public String toString() {
-            return "{" +
-                    "name='" + name + '\'' +
-                    ", age=" + age +
-                    ", gender=" + gender +
-                    '}';
+            return "{" + "name='" + name + '\'' + ", age=" + age + ", gender=" + gender + '}';
         }
 
         @Override
@@ -64,33 +50,54 @@ public class Main {
         }
     }
 
-    int ManStudentsCount = 0;
+    public static double AverageAgeOfMaleStudents(Collection<Student> students) {
 
-    int ManStudentsAgeSum = 0;
+        return students.stream()
 
-        for(
-    Student student :students)
+                .filter(student -> student.getGender(Gender.MAN) == Gender.MAN)
 
-    {
+                .mapToDouble(Student::getAge)
 
-        if (student.getGender().equals("Man")) {
+                .average()
 
-            ManStudentsCount++;
-
-            ManStudentsAgeSum += student.getAge();
-
-        }
-
-        if (student.getAge() >= 18 && student.getAge() <= 27) {
-
-            System.out.println(student.getGender() + " " + student.getAge() + " Призывной возраст");
-
-        }
+                .orElse(0);
 
     }
+    public static Collection<Student> getStudentsForMilitaryService(Collection<Student> students) {
 
-    double averageAgeOfManStudents = (double) ManStudentsAgeSum / ManStudentsCount;
-        System.out.println("Средний возраст студентов мужского пола: "+averageAgeOfManStudents);
+        return students.stream()
+
+                .filter(student -> student.getAge() >= 18 && student.getAge() <= 27 )
+
+                .collect(Collectors.toList());
+
+    }
+    public static void main(String[] args) {
+
+        Collection<Student> students = Arrays.asList(
+
+                new Student("Дмитрий", 17, Gender.MAN),
+
+                new Student("Максим", 20, Gender.MAN),
+
+                new Student("Екатерина", 20, Gender.WOMAN),
+
+                new Student("Михаил", 28, Gender.MAN)
+
+        );
+
+        double averageAgeOfMaleStudents = AverageAgeOfMaleStudents(students);
+
+        System.out.println("Средний возраст студентов мужского пола: " + averageAgeOfMaleStudents);
+
+
+        Collection<Student> studentsForMilitaryService = getStudentsForMilitaryService(students);
+
+        System.out.println("Студенты призывного возраста:");
+
+        studentsForMilitaryService.forEach(student -> System.out.println(student.getName() + " - " + student.getAge() + " years old"));
+
+
+    }
 }
-    }
 
